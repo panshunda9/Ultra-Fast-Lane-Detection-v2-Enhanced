@@ -228,7 +228,7 @@ if __name__ == "__main__":
             width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-            output_video_path = os.path.join('images', 'result_' + os.path.basename(args.input_path))
+            output_video_path = os.path.join('result', 'result_' + os.path.basename(args.input_path))
             fourcc = cv2.VideoWriter_fourcc(*'XVID')
             out = cv2.VideoWriter(output_video_path, fourcc, fps, (width, height))
 
