@@ -1,43 +1,54 @@
 # Ultra-Fast-Lane-Detection-V2
+
 PyTorch implementation of the paper "[Ultra Fast Deep Lane Detection with Hybrid Anchor Driven Ordinal Classification](https://arxiv.org/abs/2206.07389)".
 
 
 ![](ufldv2.png "vis")
 
-# Demo 
+# Demo
+
 <a href="https://youtu.be/VkvpoHlaMe0
 " target="_blank"><img src="http://img.youtube.com/vi/VkvpoHlaMe0/0.jpg" 
 alt="Demo" width="240" height="180" border="10" /></a>
 
 
 # Install
+
 Please see [INSTALL.md](./INSTALL.md)
 
 # Get started
+
 Please modify the `data_root` in any configs you would like to run. We will use `configs/culane_res18.py` as an example.
 
 To train the model, you can run:
+
 ```
 python train.py configs/culane_res18.py --log_path /path/to/your/work/dir
 ```
+
 or
+
 ```
 python -m torch.distributed.launch --nproc_per_node=8 train.py configs/culane_res18.py --log_path /path/to/your/work/dir
 ```
+
 It should be noted that if you use different number of GPUs, the learning rate should be adjusted accordingly. The configs' learning rates correspond to 8-GPU training on CULane and CurveLanes datasets. **If you want to train on CULane or CurveLanes with single GPU, please decrease the learning rate by a factor of 1/8.** On the Tusimple, the learning rate corresponds to single GPU training.
+
 # Trained models
+
 We provide trained models on CULane, Tusimple, and CurveLanes.
 
-| Dataset    | Backbone | F1   | Link |
-|------------|----------|-------|------|
-| CULane     | ResNet18 | 75.0  |  [Google](https://drive.google.com/file/d/1oEjJraFr-3lxhX_OXduAGFWalWa6Xh3W/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1Z3W4y3eA9xrXJ51-voK4WQ?pwd=pdzs)    |
-| CULane     | ResNet34 | 76.0  |   [Google](https://drive.google.com/file/d/1AjnvAD3qmqt_dGPveZJsLZ1bOyWv62Yj/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1PHNpVHboQlmpjM5NXl9IxQ?pwd=jw8f)   |
-| Tusimple   | ResNet18 | 96.11 |   [Google](https://drive.google.com/file/d/1Clnj9-dLz81S3wXiYtlkc4HVusCb978t/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1umHo0RZIAQ1l_FzL2aZomw?pwd=6xs1)   |
-| Tusimple   | ResNet34 | 96.24 |   [Google](https://drive.google.com/file/d/1pkz8homK433z39uStGK3ZWkDXrnBAMmX/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1Eq7oxnDoE0vcQGzs1VsGZQ?pwd=b88p)   |
-| CurveLanes | ResNet18 | 80.42 |   [Google](https://drive.google.com/file/d/1VfbUvorKKMG4tUePNbLYPp63axgd-8BX/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1jCqKqgSQdh6nwC5pYpYO1A?pwd=urhe)   |
-| CurveLanes | ResNet34 | 81.34 |   [Google](https://drive.google.com/file/d/1O1kPSr85Icl2JbwV3RBlxWZYhLEHo8EN/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1fk2Wg-1QoHXTnTlasSM6uQ?pwd=4mn3)   |
+| Dataset    | Backbone | F1    | Link                                                         |
+| ---------- | -------- | ----- | ------------------------------------------------------------ |
+| CULane     | ResNet18 | 75.0  | [Google](https://drive.google.com/file/d/1oEjJraFr-3lxhX_OXduAGFWalWa6Xh3W/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1Z3W4y3eA9xrXJ51-voK4WQ?pwd=pdzs) |
+| CULane     | ResNet34 | 76.0  | [Google](https://drive.google.com/file/d/1AjnvAD3qmqt_dGPveZJsLZ1bOyWv62Yj/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1PHNpVHboQlmpjM5NXl9IxQ?pwd=jw8f) |
+| Tusimple   | ResNet18 | 96.11 | [Google](https://drive.google.com/file/d/1Clnj9-dLz81S3wXiYtlkc4HVusCb978t/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1umHo0RZIAQ1l_FzL2aZomw?pwd=6xs1) |
+| Tusimple   | ResNet34 | 96.24 | [Google](https://drive.google.com/file/d/1pkz8homK433z39uStGK3ZWkDXrnBAMmX/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1Eq7oxnDoE0vcQGzs1VsGZQ?pwd=b88p) |
+| CurveLanes | ResNet18 | 80.42 | [Google](https://drive.google.com/file/d/1VfbUvorKKMG4tUePNbLYPp63axgd-8BX/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1jCqKqgSQdh6nwC5pYpYO1A?pwd=urhe) |
+| CurveLanes | ResNet34 | 81.34 | [Google](https://drive.google.com/file/d/1O1kPSr85Icl2JbwV3RBlxWZYhLEHo8EN/view?usp=sharing)/[Baidu](https://pan.baidu.com/s/1fk2Wg-1QoHXTnTlasSM6uQ?pwd=4mn3) |
 
 For evaluation, run
+
 ```Shell
 mkdir tmp
 
@@ -45,6 +56,7 @@ python test.py configs/culane_res18.py --test_model /path/to/your/model.pth --te
 ```
 
 Same as training, multi-gpu evaluation is also supported.
+
 ```Shell
 mkdir tmp
 
@@ -52,30 +64,36 @@ python -m torch.distributed.launch --nproc_per_node=8 test.py configs/culane_res
 ```
 
 # Visualization
+
 We provide a script to visualize the detection results. Run the following commands to visualize on the testing set of CULane.
+
 ```
 python demo.py configs/culane_res18.py --test_model /path/to/your/culane_res18.pth
 ```
 
 # Tensorrt Deploy
+
 We also provide a python script to do tensorrt inference on videos.
 
 1. Convert to onnx model
-    ```
-    python deploy/pt2onnx.py --config_path configs/culane_res34.py --model_path weights/culane_res34.pth
-    ```
-    Or you can download the onnx model using the following script: https://github.com/PINTO0309/PINTO_model_zoo/blob/main/324_Ultra-Fast-Lane-Detection-v2/download.sh. And copy `ufldv2_culane_res34_320x1600.onnx` to `weights/ufldv2_culane_res34_320x1600.onnx`
+
+   ```
+   python deploy/pt2onnx.py --config_path configs/culane_res34.py --model_path weights/culane_res34.pth
+   ```
+
+   Or you can download the onnx model using the following script: https://github.com/PINTO0309/PINTO_model_zoo/blob/main/324_Ultra-Fast-Lane-Detection-v2/download.sh. And copy `ufldv2_culane_res34_320x1600.onnx` to `weights/ufldv2_culane_res34_320x1600.onnx`
 
 2. Convert to tensorrt model
 
-    Use trtexec to convert engine model
+   Use trtexec to convert engine model
 
-    `trtexec --onnx=weights/culane_res34.onnx --saveEngine=weights/culane_res34.engine`
+   `trtexec --onnx=weights/culane_res34.onnx --saveEngine=weights/culane_res34.engine`
 
 3. Do inference
-    ```
-    python deploy/trt_infer.py --config_path  configs/culane_res34.py --engine_path weights/culane_res34.engine --video_path example.mp4
-    ```
+
+   ```
+   python deploy/trt_infer.py --config_path  configs/culane_res34.py --engine_path weights/culane_res34.engine --video_path example.mp4
+   ```
 
 # Citation
 
@@ -103,7 +121,7 @@ year = {2020}
 
 ---
 
-## My Modifications (本项目修改说明)
+# My Modifications (本项目修改说明)
 
 本项目基于原开源项目 [Ultra-Fast-Lane-Detection-v2](https://github.com/cfzd/Ultra-Fast-Lane-Detection-v2) 进行了二次开发，主要修改如下：
 
@@ -113,6 +131,7 @@ year = {2020}
 - **批量处理**：新增 `batch_infer.py`，支持对文件夹内图片进行自动化批量推理与归档。
 
 ### 2. 可视化优化
+
 - **几何直线拟合**：使用 `np.polyfit` 将原版的离散圆点标记升级为连续几何直线，视觉效果更专业。
 - **自动截断**：根据检测范围自动裁剪多余线段，消除了画面顶部的无效延伸。
 
@@ -122,19 +141,71 @@ year = {2020}
 
 详细修改逻辑、代码对比及行号说明，请参阅文档：**[demo_rewrite_documentation.md](./demo_rewrite_documentation.md)**
 
-### 4.效果展示
+### 4.实现步骤：
+
+#### 快速开始 (Quick Start)
+
+#### 1. 准备模型权重
+
+本项目依赖预训练模型进行推理。请前往原版项目的 **Trained models** 章节下载对应的 `.pth` 权重文件（例如 `tusimple_res18.pth`），并将其放入项目根目录的 `weights/` 文件夹中。
+
+#### 2. 准备测试数据
+
+在运行推理前，请先获取测试照片。您可以从以下任一渠道下载：
+
+- **百度网盘**：[下载链接]( https://pan.baidu.com/s/1fzc7S4vk1BpcHhGsZ1tXVQ?pwd=svae )提取码: svae 
+- **GitHub Releases**：[点击下载 obj_train_data.zip](https://github.com/panshunda9/Ultra-Fast-Lane-Detection-v2-Enhanced/releases)
+
+下载后，将文件解压到项目根目录下的 `images/` 文件夹中。
+
+#### 3. 本地单图/视频推理
+
+本项目重写了 `demo.py`，支持直接对本地图片 (`.jpg/.png`) 或视频 (`.mp4`) 进行实时推理。
+
+**运行单张图片推理：**
+
+```
+语法：python demo.py <配置文件路径> --test_model <权重路径> --input_path <输入图片路径>
+```
+
+ 例如：**python demo.py configs/tusimple_res18.py --test_model weights/tusimple_res18.pth --input_path images/obj_train_data/图片名称.jpg**
+
+*说明：运行后会自动弹出结果窗口，推理完成后结果将保存至 `result/result_图片名称.jpg`。*
+
+**运行视频推理：**
+
+```
+语法：python demo.py <配置文件路径> --test_model <权重路径> --input_path <输入视频路径>
+```
+
+ 例如：**python demo.py configs/tusimple_res18.py --test_model weights/tusimple_res18.pth --input_path images/视频名称.mp4**
+
+*说明：运行后会自动弹出结果窗口，按 'q' 键可提前退出，推理完成后结果将保存至 `result/result_视频名称.jpg`。*
+
+ **批量推理文件夹里的图片：**
+
+新增的 `batch_infer.py` 脚本支持对包含图片的文件夹进行批量自动化推理，并自动过滤非图片文件。
+
+```
+语法：python batch_infer.py <配置文件路径> --test_model <权重路径> --input_path <输入文件夹> --test_work_dir <结果保存文件夹>
+```
+
+例如：**python batch_infer.py configs/tusimple_res18.py --test_model weights/tusimple_res18.pth --input_path images/obj_train_data --test_work_dir result/obj_train_data_res**
+
+*说明：该命令会将 `obj_train_data` 里的所有照片进行推理，并将结果归档到 `result/obj_train_data_res` 目录中。*
+
+#### 4. 注意事项
+
+- 请确保已正确安装 PyTorch 及其 CUDA 依赖，以启用 GPU 加速。
+- 第一次运行前，务必确认 `weights/` 文件夹内已包含对应的模型权重文件。
+
+### 5.效果展示
 
  
 
 ![img](img.png)
 
-### 5.测试数据下载
 
-本项目使用的测试照片已打包，可通过以下方式获取：
-- **百度网盘**：[下载链接]( https://pan.baidu.com/s/1fzc7S4vk1BpcHhGsZ1tXVQ?pwd=svae )提取码: svae 
-- **GitHub Releases**：[点击下载 obj_train_data.zip](https://github.com/panshunda9/Ultra-Fast-Lane-Detection-v2-Enhanced/releases)
-
-下载后解压到项目根目录的 `images/` 文件夹即可使用。
 
 ---
 
