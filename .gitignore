@@ -1,0 +1,24 @@
+**/__pycache__
+*.pyc
+*.pth
+*vscode
+**/build
+evaluation/
+*.pt
+#*.png
+**/dist
+**/*egg-info
+*.lprof
+
+images/*
+!images/.gitkeep
+
+result/*
+!result/.gitkeep
+
+weights/*
+!weights/.gitkeep
+
+# 忽略虚拟环境
+.venv/
+env/
